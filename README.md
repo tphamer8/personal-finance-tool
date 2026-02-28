@@ -1,1 +1,1 @@
-# personal_finance_tool
+# personal-finance-tool
