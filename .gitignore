@@ -1,0 +1,23 @@
+# financial data
+data/
+
+# database
+*.db
+*.sqlite
+*.sqlite3
+
+# CSV exports
+*.csv
+*.ofx
+*.qfx
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# env vars (future)
+.env
