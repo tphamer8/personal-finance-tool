@@ -1,4 +1,4 @@
-CREATE TABLE accounts (
+CREATE TABLE IF NOT EXISTS accounts (
     account_id TEXT PRIMARY KEY,
     account_type TEXT NOT NULL,
     current_value REAL NOT NULL DEFAULT 0.0,
@@ -6,7 +6,7 @@ CREATE TABLE accounts (
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE current_holdings (
+CREATE TABLE IF NOT EXISTS current_holdings (
     account_id TEXT NOT NULL,
     ticker TEXT NOT NULL,
     type TEXT NOT NULL, -- e.g., Stock, Bond, Mutual Fund
@@ -19,7 +19,7 @@ CREATE TABLE current_holdings (
     FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 );
 
-CREATE TABLE monthly_statements (
+CREATE TABLE IF NOT EXISTS monthly_statements (
     monthly_statement_id INTEGER PRIMARY KEY AUTOINCREMENT,
     account_id TEXT NOT NULL,
     statement_date DATE NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE monthly_statements (
     FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 );
 
-CREATE TABLE statement_holdings (
+CREATE TABLE IF NOT EXISTS statement_holdings (
     statement_holding_id INTEGER PRIMARY KEY AUTOINCREMENT,
     monthly_statement_id INTEGER NOT NULL,
     type TEXT NOT NULL, -- e.g., Stock, Bond, Mutual Fund, Money Market Fund
