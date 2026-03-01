@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS current_holdings (
     type TEXT NOT NULL, -- e.g., Stock, Bond, Mutual Fund
     description TEXT,
     quantity REAL NOT NULL DEFAULT 0.0,
+    price REAL NOT NULL DEFAULT 0.0,
     market_value REAL NOT NULL DEFAULT 0.0,
     cost_basis REAL NOT NULL DEFAULT 0.0,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -37,6 +38,7 @@ CREATE TABLE IF NOT EXISTS statement_holdings (
     ticker TEXT NOT NULL,
     description TEXT,
     quantity REAL NOT NULL DEFAULT 0.0,
+    price REAL NOT NULL DEFAULT 0.0,
     beginning_value REAL NOT NULL DEFAULT 0.0,
     ending_value REAL NOT NULL DEFAULT 0.0, 
     cost_basis REAL NOT NULL DEFAULT 0.0,
