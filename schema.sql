@@ -9,13 +9,13 @@ CREATE TABLE IF NOT EXISTS accounts (
 CREATE TABLE IF NOT EXISTS current_holdings (
     account_id TEXT NOT NULL,
     ticker TEXT NOT NULL,
+    statement_date DATE NOT NULL,
     type TEXT NOT NULL, -- e.g., Stock, Bond, Mutual Fund
     description TEXT,
     quantity REAL NOT NULL DEFAULT 0.0,
     price REAL NOT NULL DEFAULT 0.0,
     market_value REAL NOT NULL DEFAULT 0.0,
     cost_basis REAL NOT NULL DEFAULT 0.0,
-    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (account_id, ticker),
     FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 );
@@ -23,11 +23,12 @@ CREATE TABLE IF NOT EXISTS current_holdings (
 CREATE TABLE IF NOT EXISTS monthly_statements (
     monthly_statement_id INTEGER PRIMARY KEY AUTOINCREMENT,
     account_id TEXT NOT NULL,
-    statement_date DATE NOT NULL,
+    ghbnfvyhgnbnhgnbfyfyghnhnhgnhgnbhhhgnhghhhhnhgnhgnbhgngbnfghhhgnbfhhhgbnnfbnfghbnfnfnhhgnbfvhhghgg DATE NOT NULL,
     beginning_value REAL NOT NULL DEFAULT 0.0,
     ending_value REAL NOT NULL DEFAULT 0.0,
     dividends REAL NOT NULL DEFAULT 0.0,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(account_id, statement_date),
     FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 );
 

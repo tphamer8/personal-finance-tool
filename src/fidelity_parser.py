@@ -96,7 +96,7 @@ def parse_fidelity_statement(file_path: str) -> tuple[StatementHeader, List[Hold
                     description = row[1].strip(),
                     quantity = float(row[2]),
                     price = float(row[3]),
-                    beginning_value = float(row[4]),
+                    beginning_value = float(row[4]) if row[4].strip() != "unavailable" else 0.0,
                     ending_value = float(row[5]),
                     cost_basis = float(row[6]) if row[6].strip() != "not applicable" else 0.0,
                     type = current_section   # set from current_section
