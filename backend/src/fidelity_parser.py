@@ -91,6 +91,7 @@ def parse_fidelity_statement(file_path: str) -> tuple[StatementHeader, List[Hold
                     pass
 
             if current_section and len(row) >= 6:
+                ticker = row[0].strip() # define to use for type
                 holding = Holding(
                     ticker = row[0].strip(),
                     description = row[1].strip(),
@@ -99,7 +100,7 @@ def parse_fidelity_statement(file_path: str) -> tuple[StatementHeader, List[Hold
                     beginning_value = float(row[4]) if row[4].strip() != "unavailable" else 0.0,
                     ending_value = float(row[5]),
                     cost_basis = float(row[6]) if row[6].strip() != "not applicable" else 0.0,
-                    type = current_section   # set from current_section
+                    type = "Money Market" if ticker == "SPRXX" else current_section
                 )
                 holdings.append(holding)
     

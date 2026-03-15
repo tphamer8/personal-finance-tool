@@ -10,13 +10,14 @@ import os
 def upsert_account(conn: sqlite3.Connection, header: StatementHeader) -> None:
     """ Insert account or update if exists """
     conn.execute("""
-        INSERT INTO accounts (account_id, account_type, current_value)
-        VALUES (?, ?, ?)
+        INSERT INTO accounts (account_id, account_type, current_value, updated_at)
+        VALUES (?, ?, ?, ?)
         ON CONFLICT(account_id) DO UPDATE SET
             account_type = excluded.account_type,
             current_value = excluded.current_value,
-            updated_at = CURRENT_TIMESTAMP
-    """, (header.account_id, header.account_type, header.ending_value))
+            updated_at = excluded.updated_at
+        WHERE excluded.updated_at > accounts.updated_at
+    """, (header.account_id, header.account_type, header.ending_value, header.statement_date))
 
 def upsert_current_holdings(conn: sqlite3.Connection, header: StatementHeader, holdings: list[Holding]) -> None:
     """ Insert current holding or update if exists """
